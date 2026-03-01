@@ -1,8 +1,11 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f8fafc;
+  --foreground: #1e293b;
+  --primary: #16a34a;
+  --primary-dark: #15803d;
+  --primary-light: #dcfce7;
 }
 
 @theme inline {
@@ -12,15 +15,62 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Sidebar admin */
+.admin-sidebar {
+  width: 240px;
+  min-height: 100vh;
+  background: #15803d;
+  color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-sidebar a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 20px;
+  color: #dcfce7;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: background 0.15s;
+  border-radius: 6px;
+  margin: 2px 8px;
+}
+
+.admin-sidebar a:hover,
+.admin-sidebar a.active {
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+}
+
+/* Print styles */
+@media print {
+  .no-print { display: none !important; }
+  body { background: white; }
+}
+
+/* Toast animations */
+@keyframes slideIn {
+  from { transform: translateX(110%); opacity: 0; }
+  to   { transform: translateX(0);    opacity: 1; }
+}
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+.toast-enter { animation: slideIn 0.3s ease forwards; }
+.toast-exit  { animation: fadeOut 0.3s ease forwards; }
+
+/* Badge pulse */
+@keyframes pulse-red {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.6; }
+}
+.pulse-red { animation: pulse-red 1.5s ease-in-out infinite; }
